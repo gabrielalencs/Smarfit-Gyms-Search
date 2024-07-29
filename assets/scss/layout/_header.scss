@@ -1,0 +1,12 @@
+@use '../base/colors' as color;
+
+.header {
+    background-color: color.$black-primary;
+    text-align: center;
+    padding: 3rem;
+
+    img {
+        width: 55%;
+        max-width: 17.0rem;
+    }
+}

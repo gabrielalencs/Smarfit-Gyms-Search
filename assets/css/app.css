@@ -4,12 +4,54 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Gotham";
+}
+
 li {
   list-style-type: none;
 }
 
 button {
   border: none;
+}
+
+@font-face {
+  font-family: "Gotham";
+  src: url("../../assets/fonts/Gotham/gotham-light.woff2") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("../../assets/fonts/Gotham/gotham-book.woff2") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("../../assets/fonts/Gotham/gotham-bold.woff2") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("../../assets/fonts/Gotham/gotham-black.woff2") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+.header {
+  background-color: #000000;
+  text-align: center;
+  padding: 3rem;
+}
+.header img {
+  width: 55%;
+  max-width: 17rem;
 }
 
 /*# sourceMappingURL=app.css.map */
