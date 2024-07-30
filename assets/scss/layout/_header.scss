@@ -1,12 +1,21 @@
 @use '../base/colors' as color;
+@use '../base/breakpoints' as media;
 
 .header {
     background-color: color.$black-primary;
     text-align: center;
     padding: 3rem;
 
+    @include media.tablets {
+        padding: 4rem;
+    }
+
     img {
         width: 55%;
         max-width: 17.0rem;
+
+        @include media.tablets {
+            max-width: 22rem;
+        }
     }
 }

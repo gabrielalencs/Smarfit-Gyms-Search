@@ -49,9 +49,19 @@ button {
   text-align: center;
   padding: 3rem;
 }
+@media (width >= 768px) {
+  .header {
+    padding: 4rem;
+  }
+}
 .header img {
   width: 55%;
   max-width: 17rem;
+}
+@media (width >= 768px) {
+  .header img {
+    max-width: 22rem;
+  }
 }
 
 /*# sourceMappingURL=app.css.map */
