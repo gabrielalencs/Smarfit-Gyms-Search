@@ -8,8 +8,9 @@
     &__title {
         font-size: 3.4rem;
         color: color.$dark-grey;
-        line-height: 3.8rem;
+        line-height: 4rem;
         text-transform: uppercase;
+        max-width: 24.5rem;
 
         &::after {
             content: '';

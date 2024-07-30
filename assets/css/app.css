@@ -12,6 +12,11 @@ body {
   font-family: "Gotham";
 }
 
+.container {
+  max-width: 121.6rem;
+  margin: 0 auto;
+}
+
 li {
   list-style-type: none;
 }
@@ -71,8 +76,9 @@ button {
 .main-infos__title {
   font-size: 3.4rem;
   color: #333333;
-  line-height: 3.8rem;
+  line-height: 4rem;
   text-transform: uppercase;
+  max-width: 24.5rem;
 }
 .main-infos__title::after {
   content: "";
