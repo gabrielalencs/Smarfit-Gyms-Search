@@ -64,4 +64,30 @@ button {
   }
 }
 
+.main-infos {
+  margin-top: 4rem;
+  padding: 0 3rem;
+}
+.main-infos__title {
+  font-size: 3.4rem;
+  color: #333333;
+  line-height: 3.8rem;
+  text-transform: uppercase;
+}
+.main-infos__title::after {
+  content: "";
+  display: block;
+  position: relative;
+  top: 1.5rem;
+  height: 1.2rem;
+  width: 10rem;
+  background-color: #333333;
+}
+.main-infos__description {
+  margin-top: 4rem;
+  color: #808080;
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
 /*# sourceMappingURL=app.css.map */

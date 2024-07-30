@@ -1,0 +1,31 @@
+@use '../base/colors' as color;
+@use '../base/breakpoints' as media;
+
+.main-infos {
+    margin-top: 4rem;
+    padding: 0 3rem;
+
+    &__title {
+        font-size: 3.4rem;
+        color: color.$dark-grey;
+        line-height: 3.8rem;
+        text-transform: uppercase;
+
+        &::after {
+            content: '';
+            display: block;
+            position: relative;
+            top: 1.5rem;
+            height: 1.2rem;
+            width: 10rem;
+            background-color: color.$dark-grey;
+        }
+    }
+
+    &__description {
+        margin-top: 4rem;
+        color: color.$light-grey;
+        font-size: 1.6rem;
+        line-height: 1.5;
+    }
+}
