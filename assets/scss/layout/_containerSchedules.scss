@@ -1,0 +1,106 @@
+@use '../base/colors' as color;
+@use '../base/breakpoints' as media;
+
+
+.container-schedules {
+    margin: 5rem 3rem 0;
+    padding: 3rem;
+    border: .5rem solid color.$light-text;
+    border-radius: 2rem;
+
+    .icon-hour-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.6rem;
+
+        img {
+            width: 3rem;
+        }
+    }
+
+    .container-hour {
+        margin-top: 3rem;
+
+        h2 {
+            font-size: 2.5rem;
+            color: color.$light-grey;
+            font-weight: 500;
+        }
+    }
+
+    .container-options {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        & div:last-child {
+            border-bottom: none;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: .1rem solid color.$light-text;
+            padding-bottom: 1.5rem;
+            font-size: 1.6rem;
+            color: color.$light-grey;
+            font-weight: 400;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+        }
+
+        p {
+            color: color.$dark-grey;
+            font-weight: 600;
+        }
+    }
+
+    .container-academy-closed {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1.6rem;
+
+        .academy-closed span {
+            font-weight: 600;
+        }
+    }
+
+    .container-buttons {
+        margin-top: 5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+
+        button {
+            width: 100%;
+            color: color.$black-primary;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: .5rem;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        & button:first-child {
+            background-color: color.$yellow;
+        }
+
+        & button:last-child {
+            background-color: transparent;
+            border: .3rem solid color.$light-text;
+        }
+    }
+}

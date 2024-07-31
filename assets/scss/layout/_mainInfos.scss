@@ -21,6 +21,10 @@
             width: 10rem;
             background-color: color.$dark-grey;
         }
+
+        span {
+            color: color.$yellow;
+        }
     }
 
     &__description {

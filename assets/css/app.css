@@ -89,11 +89,102 @@ button {
   width: 10rem;
   background-color: #333333;
 }
+.main-infos__title span {
+  color: #FFB612;
+}
 .main-infos__description {
   margin-top: 4rem;
   color: #808080;
   font-size: 1.6rem;
   line-height: 1.5;
+}
+
+.container-schedules {
+  margin: 5rem 3rem 0;
+  padding: 3rem;
+  border: 0.5rem solid #e5e5e5;
+  border-radius: 2rem;
+}
+.container-schedules .icon-hour-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.6rem;
+}
+.container-schedules .icon-hour-container img {
+  width: 3rem;
+}
+.container-schedules .container-hour {
+  margin-top: 3rem;
+}
+.container-schedules .container-hour h2 {
+  font-size: 2.5rem;
+  color: #808080;
+  font-weight: 500;
+}
+.container-schedules .container-options {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.container-schedules .container-options div:last-child {
+  border-bottom: none;
+}
+.container-schedules .container-options div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.1rem solid #e5e5e5;
+  padding-bottom: 1.5rem;
+  font-size: 1.6rem;
+  color: #808080;
+  font-weight: 400;
+}
+.container-schedules .container-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.container-schedules .container-options p {
+  color: #333333;
+  font-weight: 600;
+}
+.container-schedules .container-academy-closed {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.6rem;
+}
+.container-schedules .container-academy-closed .academy-closed span {
+  font-weight: 600;
+}
+.container-schedules .container-buttons {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.container-schedules .container-buttons button {
+  width: 100%;
+  color: #000000;
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.container-schedules .container-buttons button:first-child {
+  background-color: #FFB612;
+}
+.container-schedules .container-buttons button:last-child {
+  background-color: transparent;
+  border: 0.3rem solid #e5e5e5;
 }
 
 /*# sourceMappingURL=app.css.map */

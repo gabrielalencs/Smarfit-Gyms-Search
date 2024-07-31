@@ -27,10 +27,66 @@
 
     <main class="container">
         <div class="main-infos">
-            <h1 class="main-infos__title">Reabertura Smart Fit</h1>
+            <h1 class="main-infos__title">Reabertura <span>Smart Fit</span></h1>
             <p class="main-infos__description">
                 O horário de funcionamento das nossas unidades está seguindo os decretos de cada município. Por isso, confira aqui se a sua unidade está aberta e as medidas de segurança que estamos seguindo.
             </p>
+        </div>
+
+        <div class="container-schedules">
+            <div class="icon-hour-container">
+                <img src="assets/images/icon-hour.png" alt="icon hour">
+                <span>Horário</span>
+            </div>
+
+            <div class="container-hour">
+                <h2>Qual horário você quer <span>treinar</span></h2>
+
+                <form class="container-options">
+                    <div>
+                        <label>
+                            <input type="radio" name="hour" id="radio-morning">
+                            Manhã
+                        </label>
+
+                        <p>06:00 ás 12h</p>
+                    </div>
+
+                    <div>
+                        <label>
+                            <input type="radio" name="hour" id="radio-afternoon">
+                            Tarde
+                        </label>
+
+                        <p>12:01 ás 18h</p>
+                    </div>
+
+                    <div>
+                        <label>
+                            <input type="radio" name="hour" id="radio-night">
+                            Noite
+                        </label>
+
+                        <p>18:01 ás 23h</p>
+                    </div>
+                </form>
+
+                <div class="container-academy-closed">
+                    <label>
+                        <input type="checkbox">
+                        <span>Exibir unidades fechadas</span>
+                    </label>
+
+                    <p class="academy-closed">
+                        Resultados encontrados: <span>167</span>
+                    </p>
+                </div>
+
+                <div class="container-buttons">
+                    <button>Encontrar unidade</button>
+                    <button>Limpar</button>
+                </div>
+            </div>
         </div>
     </main>
 </body>
