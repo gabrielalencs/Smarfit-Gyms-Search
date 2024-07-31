@@ -1,16 +1,16 @@
-@mixin tablets {
+@mixin tablet {
     @media (width >= 768px) {
         @content
     }
 }
 
-@mixin laptops {
+@mixin laptop {
     @media (width >= 992px) {
         @content
     }
 }
 
-@mixin desktops {
+@mixin desktop {
     @media (width >= 1200px) {
         @content
     }

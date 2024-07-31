@@ -159,6 +159,11 @@ button {
   justify-content: space-between;
   font-size: 1.6rem;
 }
+@media (width >= 768px) {
+  .container-schedules .container-academy-closed {
+    flex-direction: row;
+  }
+}
 .container-schedules .container-academy-closed .academy-closed span {
   font-weight: 600;
 }
@@ -169,6 +174,12 @@ button {
   align-items: center;
   gap: 1.5rem;
 }
+@media (width >= 768px) {
+  .container-schedules .container-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
 .container-schedules .container-buttons button {
   width: 100%;
   color: #000000;
@@ -177,7 +188,14 @@ button {
   border-radius: 0.5rem;
   font-size: 1.5rem;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+@media (width >= 768px) {
+  .container-schedules .container-buttons button {
+    font-size: 1.7rem;
+    width: 30rem;
+  }
 }
 .container-schedules .container-buttons button:first-child {
   background-color: #FFB612;
@@ -185,6 +203,55 @@ button {
 .container-schedules .container-buttons button:last-child {
   background-color: transparent;
   border: 0.3rem solid #e5e5e5;
+}
+
+.container-recommendations {
+  margin: 5rem 3rem 0;
+  background-color: #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5rem;
+  padding: 3rem 2rem;
+}
+@media (width >= 768px) {
+  .container-recommendations {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 7rem;
+    flex-wrap: wrap;
+  }
+}
+.container-recommendations .recommendations__item {
+  text-align: center;
+}
+.container-recommendations .recommendations__item h4 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+.container-recommendations .recommendation__icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+.container-recommendations .recommendation__icons div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.container-recommendations .recommendation__icons img {
+  width: 7rem;
+}
+@media (width >= 768px) {
+  .container-recommendations .recommendation__icons img {
+    width: 6rem;
+  }
+}
+.container-recommendations .recommendation__icons span {
+  font-size: 1.5rem;
 }
 
 /*# sourceMappingURL=app.css.map */

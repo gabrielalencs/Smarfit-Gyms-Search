@@ -1,0 +1,55 @@
+@use '../base/colors' as color;
+@use '../base/breakpoints' as media;
+
+.container-recommendations {
+    margin: 5rem 3rem 0;
+    background-color: color.$light-text;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+    padding: 3rem 2rem;
+
+    @include media.tablet {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 7rem;
+        flex-wrap: wrap;
+    }
+
+    .recommendations__item {
+        text-align: center;
+
+        h4 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+    }
+
+    .recommendation__icons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 3rem;   
+
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        img {
+            width: 7rem;
+
+            @include media.tablet {
+                width: 6rem;
+            }
+        }
+
+        span {
+            font-size: 1.5rem;
+        }
+    }
+}

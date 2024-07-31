@@ -6,7 +6,7 @@
     text-align: center;
     padding: 3rem;
 
-    @include media.tablets {
+    @include media.tablet {
         padding: 4rem;
     }
 
@@ -14,7 +14,7 @@
         width: 55%;
         max-width: 17.0rem;
 
-        @include media.tablets {
+        @include media.tablet {
             max-width: 22rem;
         }
     }
