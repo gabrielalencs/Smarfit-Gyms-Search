@@ -73,14 +73,14 @@ button {
   margin-top: 4rem;
   padding: 0 3rem;
 }
-.main-infos__title {
+.main-infos-title {
   font-size: 3.4rem;
   color: #333333;
   line-height: 4rem;
   text-transform: uppercase;
   max-width: 24.5rem;
 }
-.main-infos__title::after {
+.main-infos-title::after {
   content: "";
   display: block;
   position: relative;
@@ -89,10 +89,10 @@ button {
   width: 10rem;
   background-color: #333333;
 }
-.main-infos__title span {
+.main-infos-title span {
   color: #FFB612;
 }
-.main-infos__description {
+.main-infos-description {
   margin-top: 4rem;
   color: #808080;
   font-size: 1.6rem;
@@ -223,35 +223,121 @@ button {
     flex-wrap: wrap;
   }
 }
-.container-recommendations .recommendations__item {
+.container-recommendations .recommendations-item {
   text-align: center;
 }
-.container-recommendations .recommendations__item h4 {
+.container-recommendations .recommendations-item h4 {
   font-size: 1.8rem;
   margin-bottom: 2rem;
 }
-.container-recommendations .recommendation__icons {
+.container-recommendations .recommendation-icons {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 3rem;
 }
-.container-recommendations .recommendation__icons div {
+.container-recommendations .recommendation-icons div {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
-.container-recommendations .recommendation__icons img {
+.container-recommendations .recommendation-icons img {
   width: 7rem;
 }
 @media (width >= 768px) {
-  .container-recommendations .recommendation__icons img {
+  .container-recommendations .recommendation-icons img {
     width: 6rem;
   }
 }
-.container-recommendations .recommendation__icons span {
+.container-recommendations .recommendation-icons span {
   font-size: 1.5rem;
+}
+
+.container-gym-cards {
+  margin: 7rem 3rem 0;
+  display: grid;
+  place-items: center;
+  gap: 3rem;
+}
+@media (width >= 768px) {
+  .container-gym-cards {
+    place-items: start;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (width >= 992px) {
+  .container-gym-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (width >= 1200px) {
+  .container-gym-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.container-gym-cards .gym-card {
+  background-color: #e5e5e5;
+  width: 30rem;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+@media (width >= 768px) {
+  .container-gym-cards .gym-card {
+    width: 100%;
+  }
+}
+.container-gym-cards .card-header {
+  border-bottom: 2px solid #d7d7d7;
+  padding-bottom: 1.5rem;
+}
+.container-gym-cards .card-header .card-status {
+  color: #2FC022;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.container-gym-cards .card-header .card-title {
+  margin-top: 0.3rem;
+  font-size: 2.3rem;
+}
+.container-gym-cards .card-header .card-address {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: #808080;
+}
+.container-gym-cards .card-container-icons,
+.container-gym-cards .card-schedules {
+  margin-top: 2rem;
+  display: flex;
+  gap: 3rem;
+  row-gap: 1rem;
+  flex-wrap: wrap;
+}
+.container-gym-cards .card-container-icons .card-icon,
+.container-gym-cards .card-schedules .card-icon {
+  width: 6rem;
+}
+@media (width >= 1200px) {
+  .container-gym-cards .card-container-icons .card-icon,
+  .container-gym-cards .card-schedules .card-icon {
+    width: 5rem;
+  }
+}
+.container-gym-cards .card-schedules {
+  gap: 4rem;
+  row-gap: 2rem;
+}
+.container-gym-cards .card-schedules .card-schedules-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.container-gym-cards .card-schedules .card-day {
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+.container-gym-cards .card-schedules .card-hour {
+  font-size: 1.3rem;
 }
 
 /*# sourceMappingURL=app.css.map */
