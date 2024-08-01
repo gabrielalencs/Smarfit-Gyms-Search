@@ -1,8 +1,8 @@
 @use 'base/reset';
 
 @use 'layout/header';
-@use 'layout/main-infos';
-@use 'layout/container-schedules';
-@use 'layout/container-recommendations';
-@use 'layout/container-gym-cards';
+@use 'layout/main-information';
+@use 'layout/schedules-container';
+@use 'layout/recommendations-container';
+@use 'layout/gym-cards-container';
 @use 'layout/footer';
