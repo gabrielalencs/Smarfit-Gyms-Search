@@ -1,0 +1,23 @@
+@use '../base/colors' as color;
+@use '../base/breakpoints' as media;
+
+.footer {
+    margin-top: 10rem;
+    background-color: color.$dark-grey;
+
+    .container {
+        padding: 5rem;
+        text-align: center;
+    }
+
+    &-brand {
+        width: 70%;
+        max-width: 25rem;
+    }
+
+    &-text {
+        margin-top: 4rem;
+        color: color.$light-text;
+        font-size: 1.7rem;
+    }
+}

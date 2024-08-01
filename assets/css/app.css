@@ -126,7 +126,7 @@ button {
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 .container-schedules .container-options div:last-child {
   border-bottom: none;
@@ -190,6 +190,7 @@ button {
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.5px;
+  cursor: pointer;
 }
 @media (width >= 768px) {
   .container-schedules .container-buttons button {
@@ -338,6 +339,24 @@ button {
 }
 .container-gym-cards .card-schedules .card-hour {
   font-size: 1.3rem;
+}
+
+.footer {
+  margin-top: 10rem;
+  background-color: #333333;
+}
+.footer .container {
+  padding: 5rem;
+  text-align: center;
+}
+.footer-brand {
+  width: 70%;
+  max-width: 25rem;
+}
+.footer-text {
+  margin-top: 4rem;
+  color: #e5e5e5;
+  font-size: 1.7rem;
 }
 
 /*# sourceMappingURL=app.css.map */
