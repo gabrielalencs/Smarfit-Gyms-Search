@@ -256,7 +256,7 @@ button {
 }
 
 .container-gym-cards {
-  margin: 7rem 3rem 0;
+  margin: 5rem 3rem 0;
   display: grid;
   place-items: center;
   gap: 3rem;
