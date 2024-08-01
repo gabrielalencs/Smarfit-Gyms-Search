@@ -1,7 +1,7 @@
 @use '../base/colors' as color;
 @use '../base/breakpoints' as media;
 
-.container-academy-cards {
+.container-gym-cards {
     margin: 7rem 3rem 0;
     display: grid;
     place-items: center;
@@ -20,7 +20,7 @@
         grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    .academy-card {
+    .gym-card {
         background-color: color.$light-text;
         width: 30rem;
         border-radius: 1rem;
