@@ -64,7 +64,8 @@ function showGymCards(gyms) {
     const gymCardContainer = document.querySelector('.container-gym-cards');
     gymCardContainer.innerHTML = '';
 
-    const fragment = document.createDocumentFragment();
+    const fragmentCardItems = document.createDocumentFragment();
+
 
     gyms.forEach(gym => {
         const gymCard = document.createElement('div');
@@ -106,10 +107,10 @@ function showGymCards(gyms) {
             </div>
         `;
 
-        fragment.appendChild(gymCard);
+        fragmentCardItems.appendChild(gymCard);
     });
 
-    gymCardContainer.appendChild(fragment);
+    gymCardContainer.appendChild(fragmentCardItems);
 }
 
 
@@ -119,9 +120,6 @@ const searchGyms = async () => {
 
     searchForOpenOrClosedGyms()
 
-   
-
-    
 
    
 };
