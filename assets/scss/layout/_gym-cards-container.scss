@@ -25,6 +25,7 @@
         width: 30rem;
         border-radius: 1rem;
         padding: 2rem;
+        align-self: stretch;
 
         @include media.tablet {
             width: 100%;

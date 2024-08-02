@@ -282,6 +282,7 @@ button {
   width: 30rem;
   border-radius: 1rem;
   padding: 2rem;
+  align-self: stretch;
 }
 @media (width >= 768px) {
   .container-gym-cards .gym-card {

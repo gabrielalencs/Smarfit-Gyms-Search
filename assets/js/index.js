@@ -32,8 +32,8 @@ function filterOpenGyms(gyms) {
 // mostra academias abertas assim que entramos na aplicação 
 
 const showOpenGyms = async () => {
-    const gymData = await fetchGymData();
-    const openGyms = filterOpenGyms(gymData);
+    const allGyms = await fetchGymData();
+    const openGyms = filterOpenGyms(allGyms);
 
     displayGymsCount(openGyms);
 };
@@ -43,34 +43,30 @@ document.addEventListener('DOMContentLoaded', showOpenGyms);
 
 // verifica o checkbox e faz a busca com base no mesmo
 
-function searchForOpenAndClosedGyms(gyms) {
+async function searchForOpenOrClosedGyms()  {
+    const allGyms = await fetchGymData();
+    const openGyms = filterOpenGyms(allGyms);
+    
     const checkboxClosedUnited = document.getElementById('closed-united');
 
     if (checkboxClosedUnited.checked) {
-        displayGymsCount(gyms);
+        displayGymsCount(allGyms);
+        showGymCards(allGyms) 
     } else {
-        const openGyms = filterOpenGyms(gyms);
         displayGymsCount(openGyms);
+        showGymCards(openGyms) 
     }
 }
 
+// percorre o array passado como argumento e mostra os cards com as informações do mesmo
 
-
-const searchGyms = async () => {
-    const gymData = await fetchGymData();
-
-    searchForOpenAndClosedGyms(gymData)
-
-    const openGyms = filterOpenGyms(gymData);
-
-
-
+function showGymCards(gyms) {
     const gymCardContainer = document.querySelector('.container-gym-cards');
     gymCardContainer.innerHTML = '';
 
     const fragment = document.createDocumentFragment();
 
-    gymData.forEach(gym => {
+    gyms.forEach(gym => {
         const gymCard = document.createElement('div');
         gymCard.className = 'gym-card';
 
@@ -84,32 +80,50 @@ const searchGyms = async () => {
                     ${gym.content ? gym.content.replace(/<\/?[^>]+(>|$)/g, "") : gym.street}
                 </p>
             </div>
+
             <div class="card-container-icons">
                 <img src="assets/images/required-mask.png" alt="icon" class="card-icon">
                 <img src="assets/images/required-towel.png" alt="icon" class="card-icon">
                 <img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">
                 <img src="assets/images/allowed-lockerroom.png" alt="icon" class="card-icon">
             </div>
+            
             <div class="card-schedules">
                 <p class="card-schedules-container">
                     <span class="card-day">Seg. à Sex.</span>
                     <span class="card-hour">06h às 22h</span>
                 </p>
+
                 <p class="card-schedules-container">
                     <span class="card-day">Sáb</span>
                     <span class="card-hour">Fechada</span>
                 </p>
+
                 <p class="card-schedules-container">
                     <span class="card-day">Dom.</span>
                     <span class="card-hour">Fechada</span>
                 </p>
             </div>
         `;
-        
+
         fragment.appendChild(gymCard);
     });
 
-    gymCardContainer.appendChild(fragment)
+    gymCardContainer.appendChild(fragment);
+}
+
+
+
+const searchGyms = async () => {
+    
+
+    searchForOpenOrClosedGyms()
+
+   
+
+    
+
+   
 };
 
 
