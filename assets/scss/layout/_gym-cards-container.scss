@@ -36,19 +36,26 @@
         padding-bottom: 1.5rem;
 
         .card-status {
-            color: color.$green;
             font-size: 1.5rem;
             font-weight: 700;
         }
 
+        .status-open {
+            color: color.$green;
+        }
+
+        .status-close {
+            color: color.$red;
+        }
+
         .card-title {
             margin-top: .3rem;
-            font-size: 2.3rem;
+            font-size: 2.1rem;
         }
 
         .card-address {
             margin-top: 1rem;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: color.$light-grey;
         }
     }
