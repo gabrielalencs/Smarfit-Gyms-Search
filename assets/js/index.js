@@ -59,6 +59,40 @@ async function searchForOpenOrClosedGyms() {
 }
 
 
+fetchGymData().then(response => {
+
+    let abertas = filterOpenGyms(response)
+
+    abertas.forEach(item => {
+
+        let horarios = item.schedules;
+
+        let filtradoManha = horarios.filter(item => {
+
+            return item.hour >= '06:00' && item.hour <= '12:00'
+
+        });
+
+        let filtradoTarde = horarios.filter(item => {
+
+            return item.hour >= '12:01' && item.hour <= '18:00'
+
+        });
+
+        let filtradoNoite = horarios.filter(item => {
+
+            return item.hour >= '18:01' && item.hour <= '23:00'
+
+        });
+
+        console.log(filtradoNoite);
+
+    });
+
+});
+
+
+
 
 // percorre o array passado como argumento e mostra os cards com as informações do mesmo
 
@@ -91,7 +125,6 @@ function showGymCards(gyms) {
         });
 
 
-
         gymCard.innerHTML = `
             <div class="card-header">
                 <span class="card-status ${gym.opened ? 'status-open' : 'status-close'}">
@@ -104,12 +137,35 @@ function showGymCards(gyms) {
             </div>
 
             <div class="card-container-icons">
-                <img src="assets/images/required-mask.png" alt="icon" class="card-icon">
-                <img src="assets/images/required-towel.png" alt="icon" class="card-icon">
-                <img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">
-                <img src="assets/images/allowed-lockerroom.png" alt="icon" class="card-icon">
+                ${
+                    gym.mask == 'required' 
+                        ? '<img src="assets/images/required-mask.png" alt="icon" class="card-icon">' 
+                        : '<img src="assets/images/recommended-mask.png" alt="icon" class="card-icon">'
+                }
+                ${
+                    gym.towel == 'required' 
+                        ? '<img src="assets/images/required-towel.png" alt="icon" class="card-icon">' 
+                        : '<img src="assets/images/recommended-towel.png" alt="icon" class="card-icon">'
+                }
+                ${
+                    gym.fountain == 'partial' 
+                        ? '<img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">' 
+                        : '<img src="assets/images/not_allowed-fountain.png" alt="icon" class="card-icon">'
+                }
+                ${
+                    gym.fountain == 'partial' 
+                        ? '<img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">' 
+                        : '<img src="assets/images/not_allowed-fountain.png" alt="icon" class="card-icon">'
+                       
+                }
+               
             </div>
         `;
+
+        // <img src="assets/images/required-mask.png" alt="icon" class="card-icon">
+        // <img src="assets/images/required-towel.png" alt="icon" class="card-icon">
+        // <img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">
+        // <img src="assets/images/allowed-lockerroom.png" alt="icon" class="card-icon">
 
         gymCard.appendChild(containerParagraph);
         fragmentCardItems.appendChild(gymCard);
@@ -118,7 +174,6 @@ function showGymCards(gyms) {
 
     gymCardContainer.appendChild(fragmentCardItems);
 }
-
 
 
 
