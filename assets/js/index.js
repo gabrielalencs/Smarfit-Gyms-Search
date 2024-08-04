@@ -43,20 +43,22 @@ document.addEventListener('DOMContentLoaded', showOpenGyms);
 
 // verifica o checkbox e faz a busca com base no mesmo
 
-async function searchForOpenOrClosedGyms()  {
+async function searchForOpenOrClosedGyms() {
     const allGyms = await fetchGymData();
     const openGyms = filterOpenGyms(allGyms);
-    
+
     const checkboxClosedUnited = document.getElementById('closed-united');
 
     if (checkboxClosedUnited.checked) {
         displayGymsCount(allGyms);
-        showGymCards(allGyms) 
+        showGymCards(allGyms)
     } else {
         displayGymsCount(openGyms);
-        showGymCards(openGyms) 
+        showGymCards(openGyms)
     }
 }
+
+
 
 // percorre o array passado como argumento e mostra os cards com as informações do mesmo
 
@@ -70,6 +72,25 @@ function showGymCards(gyms) {
     gyms.forEach(gym => {
         const gymCard = document.createElement('div');
         gymCard.className = 'gym-card';
+
+        const gymCardSchedules = gym.schedules;
+
+        const containerParagraph = document.createElement('div');
+        containerParagraph.className = 'card-schedules';
+
+        gymCardSchedules.forEach(schedule => {
+            const paragraph = document.createElement('p');
+            paragraph.className = 'card-schedules-container';
+
+            paragraph.innerHTML = `
+                <span class="card-day">${schedule.weekdays}</span>
+                <span class="card-hour">${schedule.hour}</span>
+            `
+
+            containerParagraph.appendChild(paragraph)
+        });
+
+
 
         gymCard.innerHTML = `
             <div class="card-header">
@@ -88,40 +109,22 @@ function showGymCards(gyms) {
                 <img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">
                 <img src="assets/images/allowed-lockerroom.png" alt="icon" class="card-icon">
             </div>
-            
-            <div class="card-schedules">
-                <p class="card-schedules-container">
-                    <span class="card-day">Seg. à Sex.</span>
-                    <span class="card-hour">06h às 22h</span>
-                </p>
-
-                <p class="card-schedules-container">
-                    <span class="card-day">Sáb</span>
-                    <span class="card-hour">Fechada</span>
-                </p>
-
-                <p class="card-schedules-container">
-                    <span class="card-day">Dom.</span>
-                    <span class="card-hour">Fechada</span>
-                </p>
-            </div>
         `;
 
+        gymCard.appendChild(containerParagraph);
         fragmentCardItems.appendChild(gymCard);
     });
+
 
     gymCardContainer.appendChild(fragmentCardItems);
 }
 
 
 
+
+
 const searchGyms = async () => {
-    
-
     searchForOpenOrClosedGyms()
-
-
-   
 };
 
 
