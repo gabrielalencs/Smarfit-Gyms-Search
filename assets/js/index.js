@@ -2,6 +2,10 @@ const gymApiURL = 'https://test-frontend-developer.s3.amazonaws.com/data/locatio
 
 const buttonSearchGyms = document.getElementById('search-btn');
 
+const inputRadioMorning = document.getElementById('radio-morning');
+const inputRadioAfternoon = document.getElementById('radio-afternoon');
+const inputRadioNight = document.getElementById('radio-night');
+
 // chamada para a api
 
 const fetchGymData = async () => {
@@ -41,7 +45,7 @@ document.addEventListener('DOMContentLoaded', showOpenGyms);
 
 
 
-// verifica o checkbox e faz a busca com base no mesmo
+// verifica os inputs e checkbox marcado e faz a busca com base no mesmo
 
 async function searchForOpenOrClosedGyms() {
     const allGyms = await fetchGymData();
@@ -49,47 +53,29 @@ async function searchForOpenOrClosedGyms() {
 
     const checkboxClosedUnited = document.getElementById('closed-united');
 
+
+
     if (checkboxClosedUnited.checked) {
         displayGymsCount(allGyms);
-        showGymCards(allGyms)
+        showGymCards(allGyms);
+
     } else {
         displayGymsCount(openGyms);
-        showGymCards(openGyms)
+        showGymCards(openGyms);
+
+
+        // if (inputRadioMorning.checked) {
+        //     let filtradoManha = openGyms.filter((item, i) => {
+        //         return item.hour >= '06:00' && item.hour <= '12:00'
+        //     });
+        //     showGymCards(filtradoManha)
+        // }
+
+
     }
+
+
 }
-
-
-fetchGymData().then(response => {
-
-    let abertas = filterOpenGyms(response)
-
-    abertas.forEach(item => {
-
-        let horarios = item.schedules;
-
-        let filtradoManha = horarios.filter(item => {
-
-            return item.hour >= '06:00' && item.hour <= '12:00'
-
-        });
-
-        let filtradoTarde = horarios.filter(item => {
-
-            return item.hour >= '12:01' && item.hour <= '18:00'
-
-        });
-
-        let filtradoNoite = horarios.filter(item => {
-
-            return item.hour >= '18:01' && item.hour <= '23:00'
-
-        });
-
-        console.log(filtradoNoite);
-
-    });
-
-});
 
 
 
@@ -102,73 +88,93 @@ function showGymCards(gyms) {
 
     const fragmentCardItems = document.createDocumentFragment();
 
-
     gyms.forEach(gym => {
         const gymCard = document.createElement('div');
         gymCard.className = 'gym-card';
 
-        const gymCardSchedules = gym.schedules;
-
         const containerParagraph = document.createElement('div');
         containerParagraph.className = 'card-schedules';
 
-        gymCardSchedules.forEach(schedule => {
-            const paragraph = document.createElement('p');
-            paragraph.className = 'card-schedules-container';
+        const gymCardSchedules = gym.schedules;
 
-            paragraph.innerHTML = `
-                <span class="card-day">${schedule.weekdays}</span>
-                <span class="card-hour">${schedule.hour}</span>
+        if (gymCardSchedules) {
+
+            gymCard.innerHTML = `
+                    <div class="card-header">
+                        <span class="card-status ${gym.opened ? 'status-open' : 'status-close'}">
+                            ${gym.opened ? 'Aberto' : 'Fechado'}
+                        </span>
+
+                        <h3 class="card-title">${gym.title}</h3>
+
+                        <p class="card-address">
+                            ${gym.content ? gym.content.replace(/<\/?[^>]+(>|$)/g, "") : gym.street}
+                        </p>
+                    </div>
+
+                    
+                    <div class='card-container-icons'>
+                        ${gym.mask == 'required'
+                            ? '<img src="assets/images/required-mask.png" alt="icon" class="card-icon">'
+                            :    '<img src="assets/images/recommended-mask.png" alt="icon" class="card-icon">'
+                        }
+
+                        ${gym.towel == 'required'
+                            ? '<img src="assets/images/required-towel.png" alt="icon" class="card-icon">'
+                            : '<img src="assets/images/recommended-towel.png" alt="icon" class="card-icon">'
+                        }
+
+                        ${gym.fountain == 'partial'
+                            ? '<img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">'
+                            : '<img src="assets/images/not_allowed-fountain.png" alt="icon" class="card-icon">'
+                        }
+
+                        ${gym.locker_room == 'allowed'
+                            ? '<img src="assets/images/allowed-lockerroom.png" alt="icon" class="card-icon">'
+                            : gym.locker_room == 'partial'
+                                ? '<img src="assets/images/partial-lockerroom.png" alt="icon" class="card-icon">'
+                                : '<img src="assets/images/closed-lockerroom.png" alt="icon" class="card-icon">'
+                        }
+                </div>
+                    
+            `;
+
+
+            gymCardSchedules.forEach(schedule => {
+                const paragraph = document.createElement('p');
+                paragraph.className = 'card-schedules-container';
+
+                paragraph.innerHTML = `
+                    <span class="card-day">${schedule.weekdays}</span>
+                    <span class="card-hour">${schedule.hour}</span>
+                `
+
+                containerParagraph.appendChild(paragraph)
+            });
+
+            gymCard.appendChild(containerParagraph);
+
+
+
+        } else {
+            gymCard.innerHTML = `
+                <div class="card-header">
+                    <span class="card-status ${gym.opened ? 'status-open' : 'status-close'}">
+                        ${gym.opened ? 'Aberto' : 'Fechado'}
+                    </span>
+
+                    <h3 class="card-title">${gym.title}</h3>
+
+                    <p class="card-address">
+                        ${gym.content ? gym.content.replace(/<\/?[^>]+(>|$)/g, "") : gym.street}
+                    </p>
+                </div> 
             `
+        }
 
-            containerParagraph.appendChild(paragraph)
-        });
-
-
-        gymCard.innerHTML = `
-            <div class="card-header">
-                <span class="card-status ${gym.opened ? 'status-open' : 'status-close'}">
-                    ${gym.opened ? 'Aberto' : 'Fechado'}
-                </span>
-                <h3 class="card-title">${gym.title}</h3>
-                <p class="card-address">
-                    ${gym.content ? gym.content.replace(/<\/?[^>]+(>|$)/g, "") : gym.street}
-                </p>
-            </div>
-
-            <div class="card-container-icons">
-                ${
-                    gym.mask == 'required' 
-                        ? '<img src="assets/images/required-mask.png" alt="icon" class="card-icon">' 
-                        : '<img src="assets/images/recommended-mask.png" alt="icon" class="card-icon">'
-                }
-                ${
-                    gym.towel == 'required' 
-                        ? '<img src="assets/images/required-towel.png" alt="icon" class="card-icon">' 
-                        : '<img src="assets/images/recommended-towel.png" alt="icon" class="card-icon">'
-                }
-                ${
-                    gym.fountain == 'partial' 
-                        ? '<img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">' 
-                        : '<img src="assets/images/not_allowed-fountain.png" alt="icon" class="card-icon">'
-                }
-                ${
-                    gym.fountain == 'partial' 
-                        ? '<img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">' 
-                        : '<img src="assets/images/not_allowed-fountain.png" alt="icon" class="card-icon">'
-                       
-                }
-               
-            </div>
-        `;
-
-        // <img src="assets/images/required-mask.png" alt="icon" class="card-icon">
-        // <img src="assets/images/required-towel.png" alt="icon" class="card-icon">
-        // <img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">
-        // <img src="assets/images/allowed-lockerroom.png" alt="icon" class="card-icon">
-
-        gymCard.appendChild(containerParagraph);
+             
         fragmentCardItems.appendChild(gymCard);
+
     });
 
 
@@ -180,6 +186,15 @@ function showGymCards(gyms) {
 
 const searchGyms = async () => {
     searchForOpenOrClosedGyms()
+
+
+
+
+
+
+
+
+
 };
 
 
