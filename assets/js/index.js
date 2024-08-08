@@ -58,21 +58,91 @@ async function searchForOpenOrClosedGyms() {
     if (checkboxClosedUnited.checked) {
         displayGymsCount(allGyms);
         showGymCards(allGyms);
-
     } else {
         displayGymsCount(openGyms);
         showGymCards(openGyms);
 
+    }
 
-        // if (inputRadioMorning.checked) {
-        //     let filtradoManha = openGyms.filter((item, i) => {
-        //         return item.hour >= '06:00' && item.hour <= '12:00'
-        //     });
-        //     showGymCards(filtradoManha)
-        // }
+    let filteredGyms = openGyms;
 
+
+
+    if (inputRadioMorning.checked) {
+
+        filteredGyms = openGyms.map(gym => {
+
+            const filteredSchedules = gym.schedules.map(schedule => {
+
+                if (schedule.weekdays === 'Sáb.' || schedule.weekdays === 'Dom.') {
+                    return schedule;
+                }
+
+                if ((schedule.weekdays === 'Seg. à Sex.') && (schedule.hour >= '06:00' && schedule.hour <= '12:00')) {
+                    return schedule;
+                }
+
+
+                return null;
+
+            }).filter(schedule => schedule !== null);
+
+
+            return {
+                ...gym,
+                schedules: filteredSchedules
+            };
+        });
 
     }
+
+    if (inputRadioAfternoon.checked) {
+        filteredGyms = openGyms.filter(gym =>
+            gym.schedules.some(item => item.hour >= '12:01' && item.hour <= '18:00')
+        );
+    }
+
+    if (inputRadioNight.checked) {
+
+
+        filteredGyms = openGyms.filter(gym => {
+            gym.schedules.some(item => item.hour >= '18:01' && item.hour <= '23:00')
+        });
+
+        // filteredGyms = openGyms.map(gym => {
+
+        //     const filteredSchedules = gym.schedules.map(schedule => {
+
+        //         if (schedule.weekdays === 'Sáb.' || schedule.weekdays === 'Dom.') {
+        //             return schedule;
+        //         }
+
+        //         if ((schedule.weekdays === 'Seg. à Sex.') && (schedule.hour >= '18:01' && schedule.hour <= '23:00')) {
+        //             return schedule;
+        //         }
+
+        //         return null;
+
+        //     }).filter(schedule => schedule !== null);
+
+
+        //     return {
+        //         ...gym,
+        //         schedules: filteredSchedules
+        //     };
+        // });
+
+    }
+
+
+
+
+
+    displayGymsCount(filteredGyms);
+    showGymCards(filteredGyms);
+
+
+
 
 
 }
@@ -115,26 +185,26 @@ function showGymCards(gyms) {
                     
                     <div class='card-container-icons'>
                         ${gym.mask == 'required'
-                            ? '<img src="assets/images/required-mask.png" alt="icon" class="card-icon">'
-                            :    '<img src="assets/images/recommended-mask.png" alt="icon" class="card-icon">'
-                        }
+                    ? '<img src="assets/images/required-mask.png" alt="icon" class="card-icon">'
+                    : '<img src="assets/images/recommended-mask.png" alt="icon" class="card-icon">'
+                }
 
                         ${gym.towel == 'required'
-                            ? '<img src="assets/images/required-towel.png" alt="icon" class="card-icon">'
-                            : '<img src="assets/images/recommended-towel.png" alt="icon" class="card-icon">'
-                        }
+                    ? '<img src="assets/images/required-towel.png" alt="icon" class="card-icon">'
+                    : '<img src="assets/images/recommended-towel.png" alt="icon" class="card-icon">'
+                }
 
                         ${gym.fountain == 'partial'
-                            ? '<img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">'
-                            : '<img src="assets/images/not_allowed-fountain.png" alt="icon" class="card-icon">'
-                        }
+                    ? '<img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">'
+                    : '<img src="assets/images/not_allowed-fountain.png" alt="icon" class="card-icon">'
+                }
 
                         ${gym.locker_room == 'allowed'
-                            ? '<img src="assets/images/allowed-lockerroom.png" alt="icon" class="card-icon">'
-                            : gym.locker_room == 'partial'
-                                ? '<img src="assets/images/partial-lockerroom.png" alt="icon" class="card-icon">'
-                                : '<img src="assets/images/closed-lockerroom.png" alt="icon" class="card-icon">'
-                        }
+                    ? '<img src="assets/images/allowed-lockerroom.png" alt="icon" class="card-icon">'
+                    : gym.locker_room == 'partial'
+                        ? '<img src="assets/images/partial-lockerroom.png" alt="icon" class="card-icon">'
+                        : '<img src="assets/images/closed-lockerroom.png" alt="icon" class="card-icon">'
+                }
                 </div>
                     
             `;
@@ -172,7 +242,7 @@ function showGymCards(gyms) {
             `
         }
 
-             
+
         fragmentCardItems.appendChild(gymCard);
 
     });
