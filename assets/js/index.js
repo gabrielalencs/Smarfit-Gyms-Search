@@ -70,20 +70,29 @@ async function searchForOpenOrClosedGyms() {
 
     if (inputRadioMorning.checked) {
 
-        filteredGyms = openGyms.map(gym => {
+        // ?    returns the array with only the gyms with the corresponding times
 
+        let gymsWithCorrespondingHours = openGyms.filter(gym => 
+            gym.schedules.some(item => item.hour >= '05:00' && item.hour <= '12:00')
+        );
+
+
+        // ?    clears the gym hours of the array, to only show the hours of open gyms
+
+        gymsWithCorrespondingHours = gymsWithCorrespondingHours.map(gym => {
+            
             const filteredSchedules = gym.schedules.map(schedule => {
-
+                
                 if (schedule.weekdays === 'Sáb.' || schedule.weekdays === 'Dom.') {
                     return schedule;
                 }
 
-                if ((schedule.weekdays === 'Seg. à Sex.') && (schedule.hour >= '06:00' && schedule.hour <= '12:00')) {
+                if ((schedule.weekdays === 'Seg. à Sex.') && (schedule.hour >= '05:00' && schedule.hour <= '12:00')) {
                     return schedule;
                 }
 
-
-                return null;
+                return null
+     
 
             }).filter(schedule => schedule !== null);
 
@@ -92,45 +101,62 @@ async function searchForOpenOrClosedGyms() {
                 ...gym,
                 schedules: filteredSchedules
             };
+
         });
+        
+        
+        filteredGyms = gymsWithCorrespondingHours;
 
     }
 
     if (inputRadioAfternoon.checked) {
-        filteredGyms = openGyms.filter(gym =>
+
+        let academiasComHorariosCorrespondetes = openGyms.filter(gym => 
             gym.schedules.some(item => item.hour >= '12:01' && item.hour <= '18:00')
         );
+     
+
+        academiasComHorariosCorrespondetes = academiasComHorariosCorrespondetes.map(gym => {
+            
+            const filteredSchedules = gym.schedules.map(schedule => {
+                
+
+                if (schedule.weekdays === 'Sáb.' || schedule.weekdays === 'Dom.') {
+                    return schedule;
+                }
+
+                if ((schedule.weekdays === 'Seg. à Sex.') && (schedule.hour >= '12:01' && schedule.hour <= '18:00')) {
+                    return schedule;
+                }
+
+                return null
+     
+
+            }).filter(schedule => schedule !== null);
+
+
+            return {
+                ...gym,
+                schedules: filteredSchedules
+            };
+        })
+        
+        
+        filteredGyms = academiasComHorariosCorrespondetes;
+       
+        
+
+
     }
 
     if (inputRadioNight.checked) {
 
 
-        filteredGyms = openGyms.filter(gym => {
+        filteredGyms = openGyms.filter(gym => 
             gym.schedules.some(item => item.hour >= '18:01' && item.hour <= '23:00')
-        });
-
-        // filteredGyms = openGyms.map(gym => {
-
-        //     const filteredSchedules = gym.schedules.map(schedule => {
-
-        //         if (schedule.weekdays === 'Sáb.' || schedule.weekdays === 'Dom.') {
-        //             return schedule;
-        //         }
-
-        //         if ((schedule.weekdays === 'Seg. à Sex.') && (schedule.hour >= '18:01' && schedule.hour <= '23:00')) {
-        //             return schedule;
-        //         }
-
-        //         return null;
-
-        //     }).filter(schedule => schedule !== null);
+        );
 
 
-        //     return {
-        //         ...gym,
-        //         schedules: filteredSchedules
-        //     };
-        // });
 
     }
 
