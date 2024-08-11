@@ -1,4 +1,3 @@
-
 import fetchGymData from "./fetchGymData.js";
 import filterOpenGyms from "./filterOpenGyms.js";
 import displayGymsCount from "./displayGymsCount.js";

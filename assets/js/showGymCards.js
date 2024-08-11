@@ -1,64 +1,6 @@
-// imports
-
-import fetchGymData from "./fetchGymData.js";
-
-import displayGymsCount from "./displayGymsCount.js";
-
-import filterOpenGyms from "./filterOpenGyms.js";
-
-import showOnlyOpenGyms from "./showOnlyOpenGyms.js";
-
-import displayGymsOpenOrClosed from "./displayGymsOpenOrClosed.js";
-
-
-
-// events
-
-document.addEventListener('DOMContentLoaded', showOnlyOpenGyms);
-
-
-
-
-
-const buttonSearchGyms = document.getElementById('search-btn');
-
-const inputRadioMorning = document.getElementById('radio-morning');
-const inputRadioAfternoon = document.getElementById('radio-afternoon');
-const inputRadioNight = document.getElementById('radio-night');
-
-
-
-
-
-
-
-
-
-
-
-
-// verifica os inputs e checkbox marcado e faz a busca com base no mesmo
-
-async function searchForOpenOrClosedGyms() {
-
-    // mostra academias abertas ou fechadas com base no input checkbox
-
-    displayGymsOpenOrClosed();
-
-
-
-
-
-   // logica da filtragem de elementos...
-
-}
-
-
-
-
 // percorre o array passado como argumento e mostra os cards com as informações do mesmo
 
-function showGymCards(gyms) {
+const showGymCards = (gyms) => {
     const gymCardContainer = document.querySelector('.container-gym-cards');
     gymCardContainer.innerHTML = '';
 
@@ -156,23 +98,3 @@ function showGymCards(gyms) {
 
     gymCardContainer.appendChild(fragmentCardItems);
 }
-
-
-
-
-const searchGyms = async () => {
-    searchForOpenOrClosedGyms()
-
-
-
-};
-
-
-
-
-
-
-
-
-
-buttonSearchGyms.addEventListener('click', searchGyms);
