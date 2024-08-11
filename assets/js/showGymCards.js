@@ -1,8 +1,58 @@
+const gymCardContainer = document.querySelector('.container-gym-cards');
+
+
+function setStatusClass(status) {
+    return status ? 'status-open' : 'status-close';
+}
+
+function getAcademyStatus(status) {
+    return status ? 'Aberto' : 'Fechado';
+}
+
+function showAddress(gym) {
+    return gym.content ? gym.content.replace(/<\/?[^>]+(>|$)/g, "") : gym.street;
+}
+
+function addRecommendationIcon(path, alt) {
+    return `<img src="assets/images/${path}.png" alt="${alt}" class="card-icon">`;
+}
+
+function showMaskIcon(maskStatus) {
+    return maskStatus === 'required' 
+        ? addRecommendationIcon('required-mask', 'icone de máscara') 
+        : addRecommendationIcon('recommended-mask', 'icone de máscara');
+}
+
+function showTowelIcon(towelStatus) {
+    return towelStatus === 'required' 
+        ? addRecommendationIcon('required-towel', 'icone de toalha') 
+        : addRecommendationIcon('recommended-towel', 'icone de toalhaq');
+}
+
+function showFountainIcon(fountainStatus) {
+    return fountainStatus === 'partial' 
+        ? addRecommendationIcon('partial-fountain', 'icone de garrafa') 
+        : addRecommendationIcon('not_allowed-fountain', 'icone de garrafa');
+}
+
+function showLockerRoomIcon(lockerStatus) {
+    switch(lockerStatus) {
+        case 'allowed':
+            return addRecommendationIcon('allowed-lockerroom', 'icone de vestiário');
+        case 'partial':
+            return addRecommendationIcon('partial-lockerroom', 'icone de vestiário');
+        case 'closed':
+            return addRecommendationIcon('closed-lockerroom', 'icone de vestiário');
+    }
+}
+
+
 // percorre o array passado como argumento e mostra os cards com as informações do mesmo
 
 const showGymCards = (gyms) => {
-    const gymCardContainer = document.querySelector('.container-gym-cards');
+
     gymCardContainer.innerHTML = '';
+
 
     const fragmentCardItems = document.createDocumentFragment();
 
@@ -18,45 +68,23 @@ const showGymCards = (gyms) => {
         if (gymCardSchedules) {
 
             gymCard.innerHTML = `
-                    <div class="card-header">
-                        <span class="card-status ${gym.opened ? 'status-open' : 'status-close'}">
-                            ${gym.opened ? 'Aberto' : 'Fechado'}
-                        </span>
+                <div class="card-header">
+                    <span class="card-status ${setStatusClass(gym.opened)}">
+                        ${getAcademyStatus(gym.opened)}
+                    </span>
 
-                        <h3 class="card-title">${gym.title}</h3>
+                    <h3 class="card-title">${gym.title}</h3>
 
-                        <p class="card-address">
-                            ${gym.content ? gym.content.replace(/<\/?[^>]+(>|$)/g, "") : gym.street}
-                        </p>
-                    </div>
-
-                    
-                    <div class='card-container-icons'>
-                        ${gym.mask == 'required'
-                    ? '<img src="assets/images/required-mask.png" alt="icon" class="card-icon">'
-                    : '<img src="assets/images/recommended-mask.png" alt="icon" class="card-icon">'
-                }
-
-                        ${gym.towel == 'required'
-                    ? '<img src="assets/images/required-towel.png" alt="icon" class="card-icon">'
-                    : '<img src="assets/images/recommended-towel.png" alt="icon" class="card-icon">'
-                }
-
-                        ${gym.fountain == 'partial'
-                    ? '<img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">'
-                    : '<img src="assets/images/not_allowed-fountain.png" alt="icon" class="card-icon">'
-                }
-
-                        ${gym.locker_room == 'allowed'
-                    ? '<img src="assets/images/allowed-lockerroom.png" alt="icon" class="card-icon">'
-                    : gym.locker_room == 'partial'
-                        ? '<img src="assets/images/partial-lockerroom.png" alt="icon" class="card-icon">'
-                        : '<img src="assets/images/closed-lockerroom.png" alt="icon" class="card-icon">'
-                }
+                    <p class="card-address">${showAddress(gym)}</p>
                 </div>
-                    
-            `;
 
+                <div class='card-container-icons'>
+                    ${showMaskIcon(gym.mask)}
+                    ${showTowelIcon(gym.towel)}
+                    ${showFountainIcon(gym.fountain)}
+                    ${showLockerRoomIcon(gym.locker_room)}
+                </div>
+            `;
 
             gymCardSchedules.forEach(schedule => {
                 const paragraph = document.createElement('p');
@@ -71,7 +99,6 @@ const showGymCards = (gyms) => {
             });
 
             gymCard.appendChild(containerParagraph);
-
 
 
         } else {
@@ -90,11 +117,12 @@ const showGymCards = (gyms) => {
             `
         }
 
-
         fragmentCardItems.appendChild(gymCard);
 
     });
 
-
     gymCardContainer.appendChild(fragmentCardItems);
 }
+
+
+export default showGymCards;

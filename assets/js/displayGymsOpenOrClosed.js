@@ -1,11 +1,10 @@
 import fetchGymData from "./fetchGymData.js";
 import filterOpenGyms from "./filterOpenGyms.js";
 import displayGymsCount from "./displayGymsCount.js";
+import showGymCards from "./showGymCards.js";
 
 
 // checa se o usuario quer visualizar academias abertas ou fechadas
-
-const checkboxClosedUnited = document.getElementById('closed-united');
 
 const displayGymsOpenOrClosed = async () => {
     const allGyms = await fetchGymData();
@@ -15,10 +14,10 @@ const displayGymsOpenOrClosed = async () => {
 
     if (checkboxClosedUnited.checked) {
         displayGymsCount(allGyms);
-        // showGymCards(allGyms);
+        showGymCards(allGyms);
     } else {
         displayGymsCount(openGyms);
-        // showGymCards(openGyms);
+        showGymCards(openGyms);
     }
 };
 
