@@ -18,25 +18,25 @@ function addRecommendationIcon(path, alt) {
 }
 
 function showMaskIcon(maskStatus) {
-    return maskStatus === 'required' 
-        ? addRecommendationIcon('required-mask', 'icone de máscara') 
+    return maskStatus === 'required'
+        ? addRecommendationIcon('required-mask', 'icone de máscara')
         : addRecommendationIcon('recommended-mask', 'icone de máscara');
 }
 
 function showTowelIcon(towelStatus) {
-    return towelStatus === 'required' 
-        ? addRecommendationIcon('required-towel', 'icone de toalha') 
+    return towelStatus === 'required'
+        ? addRecommendationIcon('required-towel', 'icone de toalha')
         : addRecommendationIcon('recommended-towel', 'icone de toalhaq');
 }
 
 function showFountainIcon(fountainStatus) {
-    return fountainStatus === 'partial' 
-        ? addRecommendationIcon('partial-fountain', 'icone de garrafa') 
+    return fountainStatus === 'partial'
+        ? addRecommendationIcon('partial-fountain', 'icone de garrafa')
         : addRecommendationIcon('not_allowed-fountain', 'icone de garrafa');
 }
 
 function showLockerRoomIcon(lockerStatus) {
-    switch(lockerStatus) {
+    switch (lockerStatus) {
         case 'allowed':
             return addRecommendationIcon('allowed-lockerroom', 'icone de vestiário');
         case 'partial':
@@ -52,7 +52,6 @@ function showLockerRoomIcon(lockerStatus) {
 const showGymCards = (gyms) => {
 
     gymCardContainer.innerHTML = '';
-
 
     const fragmentCardItems = document.createDocumentFragment();
 
@@ -72,9 +71,7 @@ const showGymCards = (gyms) => {
                     <span class="card-status ${setStatusClass(gym.opened)}">
                         ${getAcademyStatus(gym.opened)}
                     </span>
-
                     <h3 class="card-title">${gym.title}</h3>
-
                     <p class="card-address">${showAddress(gym)}</p>
                 </div>
 
@@ -86,15 +83,14 @@ const showGymCards = (gyms) => {
                 </div>
             `;
 
-            gymCardSchedules.forEach(schedule => {
+            gymCardSchedules.forEach(({ weekdays, hour }) => {
                 const paragraph = document.createElement('p');
                 paragraph.className = 'card-schedules-container';
 
                 paragraph.innerHTML = `
-                    <span class="card-day">${schedule.weekdays}</span>
-                    <span class="card-hour">${schedule.hour}</span>
+                    <span class="card-day">${weekdays}</span>
+                    <span class="card-hour">${hour}</span>
                 `
-
                 containerParagraph.appendChild(paragraph)
             });
 
@@ -104,16 +100,12 @@ const showGymCards = (gyms) => {
         } else {
             gymCard.innerHTML = `
                 <div class="card-header">
-                    <span class="card-status ${gym.opened ? 'status-open' : 'status-close'}">
-                        ${gym.opened ? 'Aberto' : 'Fechado'}
+                    <span class="card-status ${setStatusClass(gym.opened)}">
+                        ${getAcademyStatus(gym.opened)}
                     </span>
-
                     <h3 class="card-title">${gym.title}</h3>
-
-                    <p class="card-address">
-                        ${gym.content ? gym.content.replace(/<\/?[^>]+(>|$)/g, "") : gym.street}
-                    </p>
-                </div> 
+                    <p class="card-address">${showAddress(gym)}</p>
+                </div>
             `
         }
 

@@ -10,6 +10,8 @@ import showOnlyOpenGyms from "./showOnlyOpenGyms.js";
 
 import displayGymsOpenOrClosed from "./displayGymsOpenOrClosed.js";
 
+import showGymCards from "./showGymCards.js";
+
 
 
 // events
@@ -30,7 +32,34 @@ const inputRadioNight = document.getElementById('radio-night');
 
 
 
+function filterGymsByTimeRange(gyms, startTime, endTime) {
+    return gyms.filter(gym =>
+        gym.schedules.some(item => item.hour >= startTime && item.hour <= endTime)
+    ).map(gym => {
+        const filteredSchedules = gym.schedules.map(schedule => {
 
+            if ((schedule.weekdays === 'Sáb.' || schedule.weekdays === 'Dom.') && (schedule.hour >= startTime && schedule.hour <= endTime)) {
+                return schedule;
+            } 
+
+            if (schedule.hour == 'Fechada') {
+                return schedule
+            }
+
+  
+            if (schedule.weekdays === 'Seg. à Sex.' && schedule.hour >= startTime && schedule.hour <= endTime) {
+                return schedule;
+            }
+
+            return null;
+        }).filter(schedule => schedule !== null);
+
+        return {
+            ...gym,
+            schedules: filteredSchedules
+        };
+    });
+}
 
 
 
@@ -47,114 +76,31 @@ async function searchForOpenOrClosedGyms() {
 
 
 
-
-
-   // logica da filtragem de elementos...
-
-}
+    const allGyms = await fetchGymData();
+    const openGyms = filterOpenGyms(allGyms);
 
 
 
 
-// percorre o array passado como argumento e mostra os cards com as informações do mesmo
 
-function showGymCards(gyms) {
-    const gymCardContainer = document.querySelector('.container-gym-cards');
-    gymCardContainer.innerHTML = '';
+    let filteredGyms = openGyms;
 
-    const fragmentCardItems = document.createDocumentFragment();
-
-    gyms.forEach(gym => {
-        const gymCard = document.createElement('div');
-        gymCard.className = 'gym-card';
-
-        const containerParagraph = document.createElement('div');
-        containerParagraph.className = 'card-schedules';
-
-        const gymCardSchedules = gym.schedules;
-
-        if (gymCardSchedules) {
-
-            gymCard.innerHTML = `
-                    <div class="card-header">
-                        <span class="card-status ${gym.opened ? 'status-open' : 'status-close'}">
-                            ${gym.opened ? 'Aberto' : 'Fechado'}
-                        </span>
-
-                        <h3 class="card-title">${gym.title}</h3>
-
-                        <p class="card-address">
-                            ${gym.content ? gym.content.replace(/<\/?[^>]+(>|$)/g, "") : gym.street}
-                        </p>
-                    </div>
-
-                    
-                    <div class='card-container-icons'>
-                        ${gym.mask == 'required'
-                    ? '<img src="assets/images/required-mask.png" alt="icon" class="card-icon">'
-                    : '<img src="assets/images/recommended-mask.png" alt="icon" class="card-icon">'
-                }
-
-                        ${gym.towel == 'required'
-                    ? '<img src="assets/images/required-towel.png" alt="icon" class="card-icon">'
-                    : '<img src="assets/images/recommended-towel.png" alt="icon" class="card-icon">'
-                }
-
-                        ${gym.fountain == 'partial'
-                    ? '<img src="assets/images/partial-fountain.png" alt="icon" class="card-icon">'
-                    : '<img src="assets/images/not_allowed-fountain.png" alt="icon" class="card-icon">'
-                }
-
-                        ${gym.locker_room == 'allowed'
-                    ? '<img src="assets/images/allowed-lockerroom.png" alt="icon" class="card-icon">'
-                    : gym.locker_room == 'partial'
-                        ? '<img src="assets/images/partial-lockerroom.png" alt="icon" class="card-icon">'
-                        : '<img src="assets/images/closed-lockerroom.png" alt="icon" class="card-icon">'
-                }
-                </div>
-                    
-            `;
-
-
-            gymCardSchedules.forEach(schedule => {
-                const paragraph = document.createElement('p');
-                paragraph.className = 'card-schedules-container';
-
-                paragraph.innerHTML = `
-                    <span class="card-day">${schedule.weekdays}</span>
-                    <span class="card-hour">${schedule.hour}</span>
-                `
-
-                containerParagraph.appendChild(paragraph)
-            });
-
-            gymCard.appendChild(containerParagraph);
-
-
-
-        } else {
-            gymCard.innerHTML = `
-                <div class="card-header">
-                    <span class="card-status ${gym.opened ? 'status-open' : 'status-close'}">
-                        ${gym.opened ? 'Aberto' : 'Fechado'}
-                    </span>
-
-                    <h3 class="card-title">${gym.title}</h3>
-
-                    <p class="card-address">
-                        ${gym.content ? gym.content.replace(/<\/?[^>]+(>|$)/g, "") : gym.street}
-                    </p>
-                </div> 
-            `
+    if (inputRadioMorning.checked || inputRadioAfternoon.checked || inputRadioNight.checked) {
+        if (inputRadioMorning.checked) {
+            filteredGyms = filterGymsByTimeRange(openGyms, '05:00', '12:00');
+        } else if (inputRadioAfternoon.checked) {
+            filteredGyms = filterGymsByTimeRange(openGyms, '12:01', '18:00');
+        } else if (inputRadioNight.checked) {
+            filteredGyms = filterGymsByTimeRange(openGyms, '18:01', '23:00');
         }
 
+        displayGymsCount(filteredGyms);
+        showGymCards(filteredGyms);
 
-        fragmentCardItems.appendChild(gymCard);
-
-    });
+    }
 
 
-    gymCardContainer.appendChild(fragmentCardItems);
+
 }
 
 
