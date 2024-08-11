@@ -1,4 +1,22 @@
-const gymApiURL = 'https://test-frontend-developer.s3.amazonaws.com/data/locations.json';
+// imports
+
+import fetchGymData from "./fetchGymData.js";
+
+import displayGymsCount from "./displayGymsCount.js";
+
+import filterOpenGyms from "./filterOpenGyms.js";
+
+import showOnlyOpenGyms from "./showOnlyOpenGyms.js";
+
+
+
+// events
+
+document.addEventListener('DOMContentLoaded', showOnlyOpenGyms);
+
+
+
+
 
 const buttonSearchGyms = document.getElementById('search-btn');
 
@@ -6,42 +24,14 @@ const inputRadioMorning = document.getElementById('radio-morning');
 const inputRadioAfternoon = document.getElementById('radio-afternoon');
 const inputRadioNight = document.getElementById('radio-night');
 
-// chamada para a api
-
-const fetchGymData = async () => {
-    const responseAPI = await fetch(gymApiURL);
-    const data = await responseAPI.json();
-
-    return data.locations;
-}
-
-
-// mostra na tela o resultado de academias encontradas
-
-function displayGymsCount(gyms) {
-    const gymsCountElement = document.querySelector('.academy-closed span');
-
-    gymsCountElement.textContent = gyms.length
-}
-
-
-// filtra por academias que estão abertas
-
-function filterOpenGyms(gyms) {
-    return gyms.filter(gym => gym.opened);
-}
 
 
 
-// mostra academias abertas assim que entramos na aplicação 
 
-const showOpenGyms = async () => {
-    const allGyms = await fetchGymData();
-    const openGyms = filterOpenGyms(allGyms);
 
-    displayGymsCount(openGyms);
-};
-document.addEventListener('DOMContentLoaded', showOpenGyms);
+
+
+
 
 
 
@@ -51,9 +41,10 @@ async function searchForOpenOrClosedGyms() {
     const allGyms = await fetchGymData();
     const openGyms = filterOpenGyms(allGyms);
 
+
+    
+    
     const checkboxClosedUnited = document.getElementById('closed-united');
-
-
 
     if (checkboxClosedUnited.checked) {
         displayGymsCount(allGyms);
@@ -61,112 +52,10 @@ async function searchForOpenOrClosedGyms() {
     } else {
         displayGymsCount(openGyms);
         showGymCards(openGyms);
-
-    }
-
-    let filteredGyms = openGyms;
-
-
-
-    if (inputRadioMorning.checked) {
-
-        // ?    returns the array with only the gyms with the corresponding times
-
-        let gymsWithCorrespondingHours = openGyms.filter(gym => 
-            gym.schedules.some(item => item.hour >= '05:00' && item.hour <= '12:00')
-        );
-
-
-        // ?    clears the gym hours of the array, to only show the hours of open gyms
-
-        gymsWithCorrespondingHours = gymsWithCorrespondingHours.map(gym => {
-            
-            const filteredSchedules = gym.schedules.map(schedule => {
-                
-                if (schedule.weekdays === 'Sáb.' || schedule.weekdays === 'Dom.') {
-                    return schedule;
-                }
-
-                if ((schedule.weekdays === 'Seg. à Sex.') && (schedule.hour >= '05:00' && schedule.hour <= '12:00')) {
-                    return schedule;
-                }
-
-                return null
-     
-
-            }).filter(schedule => schedule !== null);
-
-
-            return {
-                ...gym,
-                schedules: filteredSchedules
-            };
-
-        });
-        
-        
-        filteredGyms = gymsWithCorrespondingHours;
-
-    }
-
-    if (inputRadioAfternoon.checked) {
-
-        let academiasComHorariosCorrespondetes = openGyms.filter(gym => 
-            gym.schedules.some(item => item.hour >= '12:01' && item.hour <= '18:00')
-        );
-     
-
-        academiasComHorariosCorrespondetes = academiasComHorariosCorrespondetes.map(gym => {
-            
-            const filteredSchedules = gym.schedules.map(schedule => {
-                
-
-                if (schedule.weekdays === 'Sáb.' || schedule.weekdays === 'Dom.') {
-                    return schedule;
-                }
-
-                if ((schedule.weekdays === 'Seg. à Sex.') && (schedule.hour >= '12:01' && schedule.hour <= '18:00')) {
-                    return schedule;
-                }
-
-                return null
-     
-
-            }).filter(schedule => schedule !== null);
-
-
-            return {
-                ...gym,
-                schedules: filteredSchedules
-            };
-        })
-        
-        
-        filteredGyms = academiasComHorariosCorrespondetes;
-       
-        
-
-
-    }
-
-    if (inputRadioNight.checked) {
-
-
-        filteredGyms = openGyms.filter(gym => 
-            gym.schedules.some(item => item.hour >= '18:01' && item.hour <= '23:00')
-        );
-
-
-
     }
 
 
-
-
-
-    displayGymsCount(filteredGyms);
-    showGymCards(filteredGyms);
-
+   // logica da filtragem de elementos
 
 
 
