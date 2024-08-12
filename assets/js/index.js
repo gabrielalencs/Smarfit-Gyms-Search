@@ -1,5 +1,5 @@
-import searchForGyms from "./searchForGyms.js";
-import showOnlyOpenGyms from "./showOnlyOpenGyms.js";
+import showOnlyOpenGyms from "./modules/showOnlyOpenGyms.js";
+import searchForGyms from "./modules/searchForGyms.js";
 
 
 const buttonSearchGyms = document.getElementById('search-btn');
