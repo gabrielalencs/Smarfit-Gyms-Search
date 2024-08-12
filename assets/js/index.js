@@ -46,7 +46,6 @@ function filterGymsByTimeRange(gyms, startTime, endTime) {
                 return schedule
             }
 
-  
             if (schedule.weekdays === 'Seg. à Sex.' && schedule.hour >= startTime && schedule.hour <= endTime) {
                 return schedule;
             }
@@ -81,8 +80,6 @@ async function searchForOpenOrClosedGyms() {
 
 
 
-
-
     let filteredGyms = openGyms;
 
     if (inputRadioMorning.checked || inputRadioAfternoon.checked || inputRadioNight.checked) {
@@ -98,7 +95,6 @@ async function searchForOpenOrClosedGyms() {
         showGymCards(filteredGyms);
 
     }
-
 
 
 }
