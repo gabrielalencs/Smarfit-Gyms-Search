@@ -6,6 +6,7 @@
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -15,6 +16,27 @@ body {
 .container {
   max-width: 121.6rem;
   margin: 0 auto;
+}
+
+.scroll-to-top-button {
+  background-color: #000000;
+  height: 5rem;
+  width: 5rem;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 2rem;
+  right: 3rem;
+  transition: all 0.3s;
+  opacity: 0;
+}
+.scroll-to-top-button img {
+  width: 5.5rem;
+  height: 5.5rem;
+  filter: brightness(0) saturate(100%) invert(100%) sepia(6%) saturate(3%) hue-rotate(213deg) brightness(116%) contrast(100%);
 }
 
 li {

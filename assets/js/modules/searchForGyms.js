@@ -57,6 +57,8 @@ const searchForGyms = async () => {
         });
 
         gymCardContainer.appendChild(fragmentCardItems)
+
+        displayGymsCount(gymCardContainer.children)
     }
 }
 
