@@ -46,10 +46,9 @@ function showLockerRoomIcon(lockerStatus) {
 }
 
 
-// percorre o array passado como argumento e mostra os cards com as informações do mesmo
+// goes through the array of gyms passed as an argument and shows the cards with the same information
 
 const showGymCards = (gyms) => {
-
     gymCardContainer.innerHTML = '';
 
     const fragmentCardItems = document.createDocumentFragment();

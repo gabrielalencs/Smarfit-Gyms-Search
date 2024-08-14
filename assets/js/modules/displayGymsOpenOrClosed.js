@@ -3,8 +3,7 @@ import { filterOpenGyms } from "./filterOpenOrClosedGyms.js";
 import displayGymsCount from "./displayGymsCount.js";
 import showGymCards from "./showGymCards.js";
 
-
-// checa se o usuario quer visualizar academias abertas ou fechadas
+// checks whether the user wants to view open or closed gyms
 
 const displayGymsOpenOrClosed = async () => {
     const allGyms = await fetchGymData();
