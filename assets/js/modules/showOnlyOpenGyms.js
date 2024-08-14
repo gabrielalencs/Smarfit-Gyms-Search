@@ -1,7 +1,6 @@
 import fetchGymData from "./fetchGymData.js";
-import filterOpenGyms from "./filterOpenGyms.js";
+import { filterOpenGyms } from "./filterOpenOrClosedGyms.js";
 import displayGymsCount from "./displayGymsCount.js";
-
 
 // mostra academias abertas assim que entramos na aplicação 
 

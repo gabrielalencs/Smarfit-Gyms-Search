@@ -53,6 +53,11 @@
             display: flex;
             align-items: center;
             gap: .7rem;
+            cursor: pointer;
+
+            input {
+                cursor: pointer;
+            }
         }
 
         p {
@@ -69,6 +74,11 @@
         align-items: center;
         justify-content: space-between;
         font-size: 1.6rem;
+
+        label,
+        input {
+            cursor: pointer;
+        }
 
         @include media.tablet {
             flex-direction: row;
@@ -102,6 +112,11 @@
             font-weight: 700;
             letter-spacing: .5px;
             cursor: pointer;
+            transition: all .2s;
+
+            &:hover {
+                transform: scale(1.02);
+            }
 
             @include media.tablet {
                 font-size: 1.7rem;
@@ -111,6 +126,7 @@
 
         & button:first-child {
             background-color: color.$yellow;
+            border: 2px solid color.$yellow;
         }
 
         & button:last-child {

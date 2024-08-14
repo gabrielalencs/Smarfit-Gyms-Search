@@ -145,6 +145,10 @@ button {
   display: flex;
   align-items: center;
   gap: 0.7rem;
+  cursor: pointer;
+}
+.container-schedules .container-options label input {
+  cursor: pointer;
 }
 .container-schedules .container-options p {
   color: #333333;
@@ -158,6 +162,10 @@ button {
   align-items: center;
   justify-content: space-between;
   font-size: 1.6rem;
+}
+.container-schedules .container-academy-closed label,
+.container-schedules .container-academy-closed input {
+  cursor: pointer;
 }
 @media (width >= 768px) {
   .container-schedules .container-academy-closed {
@@ -191,6 +199,10 @@ button {
   font-weight: 700;
   letter-spacing: 0.5px;
   cursor: pointer;
+  transition: all 0.2s;
+}
+.container-schedules .container-buttons button:hover {
+  transform: scale(1.02);
 }
 @media (width >= 768px) {
   .container-schedules .container-buttons button {
@@ -200,6 +212,7 @@ button {
 }
 .container-schedules .container-buttons button:first-child {
   background-color: #FFB612;
+  border: 2px solid #FFB612;
 }
 .container-schedules .container-buttons button:last-child {
   background-color: transparent;

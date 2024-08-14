@@ -1,11 +1,10 @@
 const gymCardContainer = document.querySelector('.container-gym-cards');
 
-
-function setStatusClass(status) {
+export function setStatusClass(status) {
     return status ? 'status-open' : 'status-close';
 }
 
-function getAcademyStatus(status) {
+export function getAcademyStatus(status) {
     return status ? 'Aberto' : 'Fechado';
 }
 
@@ -110,7 +109,6 @@ const showGymCards = (gyms) => {
         }
 
         fragmentCardItems.appendChild(gymCard);
-
     });
 
     gymCardContainer.appendChild(fragmentCardItems);

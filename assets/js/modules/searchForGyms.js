@@ -1,18 +1,21 @@
 import fetchGymData from "./fetchGymData.js";
-import filterOpenGyms from "./filterOpenGyms.js";
+import { filterOpenGyms, filterClosedGyms } from "./filterOpenOrClosedGyms.js";
 import displayGymsOpenOrClosed from "./displayGymsOpenOrClosed.js";
 import filterGymsByTimeRange from "./filterGymsByTimeRange.js";
 import displayGymsCount from "./displayGymsCount.js";
 import showGymCards from "./showGymCards.js";
+import { setStatusClass, getAcademyStatus } from "./showGymCards.js";
 
 
 const inputRadioMorning = document.getElementById('radio-morning');
 const inputRadioAfternoon = document.getElementById('radio-afternoon');
 const inputRadioNight = document.getElementById('radio-night');
+const checkboxClosedUnited = document.getElementById('closed-united');
+const gymCardContainer = document.querySelector('.container-gym-cards');
 
 
 const searchForGyms = async () => {
-    
+
     displayGymsOpenOrClosed();
 
     const allGyms = await fetchGymData();
@@ -31,6 +34,29 @@ const searchForGyms = async () => {
 
         displayGymsCount(filteredGyms);
         showGymCards(filteredGyms);
+    }
+
+
+    if (checkboxClosedUnited.checked) {
+        let closedGyms = filterClosedGyms(allGyms);
+        const fragmentCardItems = document.createDocumentFragment();
+
+        closedGyms.forEach(gym => {
+            const gymCard = document.createElement('div');
+            gymCard.className = 'gym-card';
+
+            gymCard.innerHTML = `
+                <div class="card-header">
+                    <span class="card-status ${setStatusClass(gym.opened)}">
+                        ${getAcademyStatus(gym.opened)}
+                    </span>
+                    <h3 class="card-title">${gym.title}</h3>
+                </div>
+            `
+            fragmentCardItems.appendChild(gymCard);
+        });
+
+        gymCardContainer.appendChild(fragmentCardItems)
     }
 }
 
