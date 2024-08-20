@@ -6,8 +6,10 @@
 
 <h2>📖 Sobre o Projeto</h2>
 <p>
-  Este projeto se trata de um teste técnico proposto pela SmartFit. Onde o objetivo era construir uma aplicação para buscar academias e filtrar as mesmas em hórarios específicos (manhã, tarde e noite). 
-  Todas as informações vem de uma API disponibilizada pela própria empresa.
+  Este projeto se trata de um teste técnico proposto pela $\color{orange}{\textsf{SmartFit}}$, onde o objetivo era construir uma aplicação para buscar academias, filtrar as mesmas em hórarios específicos (manhã, tarde e noite) e mostrar seus regimentos. Todas as informações vem de uma API disponibilizada pela própria empresa.
+</p>
+<p> 
+  A ideia surgiu em resposta às necessidades e desafios impostos pela pandemia de 2020.
 </p>
 
 <h2>⚙️ Funcionalidades</h2>
@@ -27,3 +29,9 @@
   <li>JavaScript</li>
   <li>SASS/SCSS</li>
 </ul>
+
+<br>
+
+<div align="center">
+  <p>Desenvolvido com 💛 por <b>Gabriel de Alencar</b></p>
+</div>
